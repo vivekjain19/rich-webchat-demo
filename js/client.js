@@ -25,7 +25,7 @@ async function send() {
 
   // Send Push Notification
   console.log("Sending Push...");
-  await fetch("https://vivekdialogflow.azurewebsites.net/api/subscribe", {
+  await fetch("https://vivekdialogflowtemp.azurewebsites.net/subscribe", {
     method: "POST",
     body: JSON.stringify(subscription),
     headers: {
