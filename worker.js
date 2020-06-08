@@ -1,4 +1,30 @@
 console.log("Service Worker Loaded...");
+const CACHE_NAME = 'static-cache-v1';
+
+// CODELAB: Add list of files to cache here.
+const FILES_TO_CACHE = [
+];
+
+self.addEventListener('install', (evt) => {
+  console.log('[ServiceWorker] Install');
+  // CODELAB: Precache static resources here.
+
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (evt) => {
+  console.log('[ServiceWorker] Activate');
+  // CODELAB: Remove previous cached data from disk.
+
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', (evt) => {
+  console.log('[ServiceWorker] Fetch', evt.request.url);
+  // CODELAB: Add fetch event handler here.
+
+});
+
 
 
 self.addEventListener("push", e => {
@@ -13,20 +39,26 @@ self.addEventListener("push", e => {
 
 self.addEventListener('notificationclick', function(event) {
     event.notification.close();
-   // event.waitUntil(clients.openWindow('weather/advisory'));  
    
- event.waitUntil(clients.matchAll({ type: 'window' }).then(clientsArr => {
-  const hadWindowToFocus = clientsArr.some(postMessage);
-
-    // If a Window tab matching the targeted URL already exists, focus that;
-   // const hadWindowToFocus = clientsArr.some(windowClient => windowClient.url === windowClient.url ? (windowClient.focus(), true) : false);
-    // Otherwise, open a new tab to the applicable URL and focus it.
-  //  if (!hadWindowToFocus) clients.openWindow(event.notification.data.url).then(windowClient => windowClient ? windowClient.focus() : null);
-  }));
-
-  clients.openWindow("https://dialogflowvivektemp2.azurewebsites.net/?operation=attendance").then(windowClient => windowClient ? windowClient.focus() : null);
+    event.waitUntil(clients.matchAll({
+      type: "window"
+    }).then(function(clientList) {
+      for (var i = 0; i < clientList.length; i++) {
+        var client = clientList[i];
+        client.postMessage({
+          message: 'Received a push message.',
+          time: new Date().toString()
+        });
+          client.focus();
+          return false;
+          break;
+        
+      }
+     if (clients.openWindow)
+      return clients.openWindow('/?operation=attendance');
+    }));
+  });
   
-});
 
 function postMessage(windowClient)
 {
@@ -34,8 +66,8 @@ function postMessage(windowClient)
   {
     
     windowClient.postMessage({
-      msg: "Please mark my attendance",
-      url: event.request.url
+      msg: "Please mark my attendance"
+      
     });
 return true;
 

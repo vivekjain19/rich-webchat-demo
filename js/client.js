@@ -6,6 +6,12 @@ if ("serviceWorker" in navigator) {
   send().catch(err => console.error(err));
 }
 
+navigator.serviceWorker.addEventListener('message', function(event) {
+  $("#message").val('Please mark my attendance');
+  $('#submit').submit();  
+});
+
+
 $( window ).on( "load", function(){
 
   var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -17,6 +23,12 @@ $( window ).on( "load", function(){
       $('#submit').submit();  
     }  
 }
+
+var uri = window.location.toString();
+	if (uri.indexOf("?") > 0) {
+	    var clean_uri = uri.substring(0, uri.indexOf("?"));
+	    window.history.replaceState({}, document.title, clean_uri);
+	}
 
 });
 
