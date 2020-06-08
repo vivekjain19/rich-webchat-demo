@@ -28,8 +28,8 @@
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-76380861-2', 'auto');
-        ga('send', 'pageview');
+        //ga('create', 'UA-76380861-2', 'auto');
+        //ga('send', 'pageview');
 
     </script>
     <script type="text/javascript">
@@ -39,6 +39,8 @@
     </script>
 </head>
 <body class="fontStyle">
+
+<input id="testNotify" type="button"> Send Test Notification  </input>
 
 <div class="topstrip" id="topstrip">Sponsored by <a href="https://learn.miningbusinessdata.com/p/dialogflow-toolkit?ref=coursebot" style="color:#d3d3d3">
         Dialogflow Toolkit</a>&nbsp;&nbsp;&nbsp;</div>

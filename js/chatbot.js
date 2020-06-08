@@ -98,6 +98,12 @@ function postAjax(query,sessionid){
             if(responseObj.defaultResponse){
                 defaultResponse = responseObj.defaultResponse;
             }
+
+            if(responseObj.fulfillmentMessages)
+            {
+                defaultResponse=responseObj.text.text[0];
+            }
+
             var speech = responseObj.speech;
             var messages = responseObj.messages;
             var eoc = responseObj.isEndOfConversation;
