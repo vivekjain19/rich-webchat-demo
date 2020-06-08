@@ -27,6 +27,12 @@ $(function () {
                 var messages = responseObj.messages;
                 var eoc = responseObj.isEndOfConversation;
 
+                if(messages.length && messages[0].text)
+                {
+                    defaultResponse=messages[0].text.text[0];
+    
+                }
+
                 var answerRow = jQuery('<div/>',{
                     'class':'row'
                 });
@@ -99,13 +105,17 @@ function postAjax(query,sessionid){
                 defaultResponse = responseObj.defaultResponse;
             }
 
-            if(responseObj.fulfillmentMessages)
-            {
-                defaultResponse=responseObj.text.text[0];
-            }
-
+          
             var speech = responseObj.speech;
             var messages = responseObj.messages;
+
+            if(messages.length && messages[0].text)
+            {
+                defaultResponse=messages.text.text[0];
+
+            }
+
+
             var eoc = responseObj.isEndOfConversation;
 
             var answerRow = jQuery('<div/>',{

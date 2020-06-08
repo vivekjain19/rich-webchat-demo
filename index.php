@@ -37,13 +37,14 @@
             $("#lightSlider").lightSlider();
         });
     </script>
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body class="fontStyle">
 
-<input id="testNotify" type="button"> Send Test Notification  </input>
 
-<div class="topstrip" id="topstrip">Sponsored by <a href="https://learn.miningbusinessdata.com/p/dialogflow-toolkit?ref=coursebot" style="color:#d3d3d3">
-        Dialogflow Toolkit</a>&nbsp;&nbsp;&nbsp;</div>
+
+<div class="topstrip" id="topstrip"><a id="testNotify" href="#" style="color:#d3d3d3">
+        Send Test Notification</a>&nbsp;&nbsp;&nbsp;</div>
 <div class="topbar container-fluid" id="chat-text" style="background-color: #fafafa">
 </div>
 <form>
@@ -51,7 +52,7 @@
         <input class="inputbox"
                placeholder="Write something and press Enter..." id="message" name="date" value="" x-webkit-speech>
     </span>
-    <input name="submit" type="hidden" value="Submit">
+    <input id="submit" name="submit" type="hidden" value="Submit">
 </form>
 <?php
 $event = '';

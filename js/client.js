@@ -6,12 +6,36 @@ if ("serviceWorker" in navigator) {
   send().catch(err => console.error(err));
 }
 
-$('#testNotify').click(function(){
-sendNotification();
+$( window ).on( "load", function(){
+
+  var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+  for (var i = 0; i < url.length; i++) {  
+    var urlparam = url[i].split('=');  
+    if (urlparam[0] == 'operation') {  
+      $("#message").val('Please mark my attendance');
+      $('#submit').submit();  
+    }  
+}
+
+});
+
+$(document).ready(function() {
+
+
+  $('#testNotify').click(function(){
+   sendNotification();
+    return false;
+    });
+
 });
 
 async function sendNotification()
 {
+  const register = await navigator.serviceWorker.register("/worker.js", {
+    scope: "/"
+  });
+  console.log("Service Worker Registered...");
 
   const subscription = await register.pushManager.subscribe({
     userVisibleOnly: true,
